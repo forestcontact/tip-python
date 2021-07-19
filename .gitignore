@@ -1,3 +1,11 @@
+*.a
+main
+tmp
+_skbuild
+dist
+cp.sh
+.db.pkl
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

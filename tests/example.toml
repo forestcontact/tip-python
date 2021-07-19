@@ -1,0 +1,19 @@
+[api]
+port = 7000
+
+[store]
+dir = "/tmp/tip"
+
+[messenger]
+user = ""
+session = ""
+key = ""
+buffer = 64
+conversation = ""
+
+[node]
+key = ""
+signers = [
+  "5JZj14hukDuaz3YKtkaHuXPLRCxZNiv1rgUPPdXAxY4T6tEtLnJm2A7EkLu5jvM6jvrXqTA9nmPBv5fsToPMRAy7b9JiFzgccuwgYRpQv6NkZBK2DZWDrJGPi7wvST3PzSDx9ZYcPpGQP5mvPQctgJCtxLHhMdKoDckf7s91baKt6xJ6JnMjsw"
+]
+timeout = 10

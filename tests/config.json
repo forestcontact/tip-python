@@ -1,0 +1,29 @@
+{
+    "commitments": [
+        "5J3Fy8XJgzGhTrGGoNPSQ8uFrPcPPBTUACWbHywGsBi3UHx9Y9BxbsdkqPH8VnKeKGJBpemSHWBCqyAQQkmRWif9Z9ZNsRi17t59FwEvxmt1rRJUF8uZvEQgZTXbGoC8rdaTtUYbVtFqi5Df49GvJqt8bou52xdW1Uq2ViWDuHBBvV7V5imy9D",
+        "5HoPjVcXwoo1bs2CmFuQinThxF12HWYYw51DnJaHhc8QhpkuPLZ26C7P98MJgeVdiyMgbTPBZ4TdKXBrU66GRZhtfKkodnJf92c4ovJat5XuFR3NNcBdmqxmyfydNhys3KGkQhvtiBn2r5WWBtpKiXaW6C8Ujduq3fsnRDDbjf721ZP7sSuQQo",
+        "5HpdVzSPyRG12Q8EkjPksUHswTPqsTP64FaShT3wntSKDGB91VTqLsNGdBCGjmpTx1PU7bULYCjR9KdrJ1mR4QAPB3z5dUDLxLf3Vmiz8XnDHCDwcz7Y2gFMxSuab3rqR3gMUPeki6aUtqgdq4nFwJjP5eaVbtgy6JAmMgSu5NLLwkGhJXyqyS"
+    ],
+    "signers": [
+        {
+            "identity": "5HNVXE3VjPihbXETswQP9VstqVtAcUZCqN5wM319PuzoHvkLGqnJGRUQeQQ3K1dFTmQLA2wBH8x555K1eE7ZJ8mSTi6fuCyhbGVtBikLx7Vvyr8o2G8i6G9LnsiCKdEW5Cus8bYUm8Y8b97ANGyqJpw13NtcR8yBMV6ZheemHytK6qFZbzkCi6",
+            "api": "http://127.0.0.1:7004",
+            "index": 0
+        },
+        {
+            "identity": "5HzcoccrEtsrDYsw839d2rSZ517Ao1KTMK68Y4Fk98pxChvH5DhY2r8e8RPdbAVgXHEo2Y1JgpYMFJFCdeHuF5YYY8rDGpZhN83XEoHF7quQaYeqVSVCEZJzc2Yxtm9gnrWyao7aPyDQAucP24jBsmt2Nftf3i3FLzvyEma8WwSyGv3G7dmYg2",
+            "api": "http://127.0.0.1:7002",
+            "index": 1
+        },
+        {
+            "identity": "5J8AiBRnmn2LZNW6BogGjBCkY3E9gzMcAQ9Rh9cHVw4NfB2msUUELkbxh6jj3TvcrHqY5UpiM1M3Q63pak9vRMGsxo8CDTHNTUgkzkdwZetVonmyJwFLpSi6T1Gwi59nG9XLoCE3rCmqBGBYkRg4yPGzMzyiLHP7W4KhPmJR3eQHvR8PWwpyrk",
+            "api": "http://127.0.0.1:7003",
+            "index": 2
+        },
+        {
+            "identity": "5JV5VcGmJ4i3neCErFUdyAVwTqdQk9J91CDKmvM1EsowJ1F4x5ZkKg2kJBq2AaTwuf1hztvCnBhP5r6iTHS28K8uiLdu28o2o3GpwL4CKJLuzdvdkiCw58pneGqgqVwwVFKE8jYNYxaeY1r6y8ULfVZeJzQxDAuRnVBdynqsHxf1nNUZ4824ck",
+            "api": "http://127.0.0.1:7001",
+            "index": 3
+        }
+    ]
+}

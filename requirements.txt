@@ -1,0 +1,10 @@
+scikit-build
+cython
+pycparser>=2.19
+pycryptodome>=3.7.2
+PyJWT>=2.1.0
+python-dateutil>=2.7.5
+requests>=2.21.0
+websockets>=9.1
+httpx
+base58
