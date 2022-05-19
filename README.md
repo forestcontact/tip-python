@@ -7,7 +7,7 @@
 
 ```bash
 pipenv install
-cd src/tip/ && go build -o libtip.a -buildmode=c-archive && cd ..
+cd src/tip/ && go build -o libtip.a -buildmode=c-archive && cd .. && cd .. 
 pipenv run python3 setup.py bdist_wheel
 ```
 
