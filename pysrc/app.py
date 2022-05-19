@@ -1,6 +1,7 @@
 from typing import Any
 import io
 import sys
+import time
 import json
 import base64
 import hashlib
@@ -52,7 +53,7 @@ def gen_request(key, nonce, ephemeral, rotate, node_id):
         "nonce":     nonce,
         "grace":     grace
     }
-
+    print(data)
     if rotate:
         rsum = rotate + node_id
         rsum = rsum.encode()
@@ -75,34 +76,31 @@ def run_sign(args: Any):
         config = json.load(f)
 
     partials = {}
+    assignees = {}
     for signer in config['signers']:
         logger.info(signer)
         node_id = signer['identity']
-        request = gen_request(args.key, args.nonce, args.ephemeral, args.rotate, node_id)
+        # use ms since epoch as nonce
+        request = gen_request(args.key, int(time.time()*1000), args.ephemeral, args.rotate, node_id)
 
         url = signer['api']
-        print(url)
         r = httpx.post(url, json=request)
-        print(r)
         r = r.json()
-        # logger.info(r)
         if 'error' in r:
             logger.info(r)
             continue
-        print(r)
         partial = r['data']['cipher']
         partial = bytes.fromhex(partial)
         dec = partial = crypto.decrypt(node_id, args.key, partial)
-        print("partial", partial, len(partial), 128+66+8)
         partial, assignee = dec[8:74], dec[74:]
-        print("assignee", assignee)
         nonce = int.from_bytes(dec[:8], 'big')
         index = int.from_bytes(dec[8:10], 'big')
         logger.info("index: %s nonce: %s partial: %s", index, nonce, partial)
         partials[index] = partial.hex()
-        print(index, len(partial))
+        assignees[index] = assignee.hex()
 
     try:
+        # https://github.com/drand/kyber/blob/v1.1.10/sign/tbls/tbls.go#L118
         r = crypto.tbls_recover(assignee.hex(), list(partials.values()), config['commitments'], len(config['signers']))
         logger.info('++++signature:%s', r)
         return r
