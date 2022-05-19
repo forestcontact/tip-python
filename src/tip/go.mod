@@ -3,8 +3,9 @@ module tip-python
 go 1.16
 
 require (
-	github.com/MixinNetwork/tip v0.0.0-20210710213901-e6fc3b21f2c1 // indirect
-	github.com/dgraph-io/badger/v3 v3.2103.0 // indirect
-	github.com/drand/kyber v1.1.6 // indirect
-	golang.org/x/crypto v0.0.0-20210711020723-a769d52b0f97 // indirect
+	github.com/DataDog/zstd v1.4.1 // indirect
+	github.com/MixinNetwork/tip v0.0.0-20220205072834-b65200165c62
+	github.com/dgraph-io/badger/v3 v3.2103.2
+	github.com/drand/kyber v1.1.7
+	golang.org/x/crypto v0.0.0-20211215153901-e495a2d5b3d3
 )

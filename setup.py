@@ -20,8 +20,8 @@ version = '%s.%s' % (version[0], version[1])
 
 setup(
     name="tip",
-    version="0.2.0",
-    description="tip Binding Project",
+    version="0.3.0",
+    description="TIP Binding Project",
     author='learnforpractice',
     license="MIT",
     packages=['tip'],
@@ -37,7 +37,8 @@ setup(
         "requests>=2.21.0",
         "websockets>=9.1",
         "httpx",
-        "base58"
+        "base58",
+        "toml"
     ],
     tests_require=['pytest'],
     setup_requires=setup_requires,

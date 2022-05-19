@@ -349,16 +349,15 @@ func tbls_recover_(key *C.char, partials *C.char, commitments *C.char, total_sig
 		__commitments[i] = commitment
 	}
 
-	_key, err := crypto.PrivateKeyFromHex(C.GoString(key))
+
+	suite := bn256.NewSuiteG2()
+	scheme := tbls.NewThresholdSchemeOnG1(bn256.NewSuiteG2())
+	poly := share.NewPubPoly(suite, suite.Point().Base(), __commitments)
+	key_bytes, err := hex.DecodeString(C.GoString(key))
 	if err != nil {
 		return renderError(err)
 	}
-
-	suite := bn256.NewSuiteG2()
-	id := crypto.PublicKeyString(crypto.PublicKey(_key))
-	scheme := tbls.NewThresholdSchemeOnG1(bn256.NewSuiteG2())
-	poly := share.NewPubPoly(suite, suite.Point().Base(), __commitments)
-	sig, err := scheme.Recover(poly, []byte(id), __partials, len(__commitments), int(total_signers))
+	sig, err := scheme.Recover(poly, key_bytes, __partials, len(__commitments), int(total_signers))
 	if err != nil {
 		return renderError(err)
 	}

@@ -10,10 +10,6 @@ import logging
 import asyncio
 import concurrent.futures
 
-from mixin.mixin_bot_api import MixinBotApi
-from mixin.mixin_ws_api import MixinWSApi
-
-
 from . import message
 from . import tip
 from . import kyber
@@ -222,7 +218,7 @@ class Node:
         tasks = [t for t in asyncio.all_tasks() if t is not asyncio.current_task()]
         for task in tasks:
             task.cancel()
-        await asyncio.gather(*tasks, return_exceptions=True)    
+        await asyncio.gather(*tasks, return_exceptions=True)
         # self.loop.stop()
         logger.info('Done')
         #exit all async tasks
@@ -327,7 +323,7 @@ class Node:
         # logger.info('++++finish')
         # logger.info(r)
         # return
-        
+
         conversation = self.config.get_messenger_config().conversation
 
         msg = self.p.deal()

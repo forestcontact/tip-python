@@ -57,6 +57,7 @@ def tbls_sign(index: int, priv: PrivateKey, identity: PublicKey):
     return parse_ret(ret)
 
 def tbls_recover(key: PrivateKey, partials: List[str], commitments: List[PublicKey], total_signers: int):
+    print("tbls_recover", key, json.dumps(partials), json.dumps(commitments), total_signers)
     ret = _tip.tbls_recover(key, json.dumps(partials), json.dumps(commitments), total_signers)
     return parse_ret(ret)
 

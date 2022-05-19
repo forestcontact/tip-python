@@ -14,8 +14,6 @@ logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s %(levelname)s %(module)s %(lineno)d %(message)s')
 logger = logging.getLogger(__name__)
 
-from mixin.mixin_bot_api import MixinBotApi
-
 from . import tip
 from . import crypto
 from .tipconfig import TipConfig, NodeConfig
@@ -49,10 +47,10 @@ def gen_request(key, nonce, ephemeral, rotate, node_id):
     # )
 
     data = {
-		"identity":  crypto.get_public_key(key),
-		"ephemeral": esum.hex(),
-		"nonce":     nonce,
-		"grace":     grace
+        "identity":  crypto.get_public_key(key),
+        "ephemeral": esum.hex(),
+        "nonce":     nonce,
+        "grace":     grace
     }
 
     if rotate:
@@ -76,32 +74,38 @@ def run_sign(args: Any):
     with open(config, 'r') as f:
         config = json.load(f)
 
-    partials = []
+    partials = {}
     for signer in config['signers']:
         logger.info(signer)
         node_id = signer['identity']
         request = gen_request(args.key, args.nonce, args.ephemeral, args.rotate, node_id)
 
         url = signer['api']
+        print(url)
         r = httpx.post(url, json=request)
-        logger.info(r.text)
+        print(r)
         r = r.json()
         # logger.info(r)
         if 'error' in r:
             logger.info(r)
             continue
-        partial = r['data']['partial']
+        print(r)
+        partial = r['data']['cipher']
         partial = bytes.fromhex(partial)
-        partial = crypto.decrypt(node_id, args.key, partial)
-        nonce = int.from_bytes(partial[:8], 'big')
-        partial = partial[8:]
-        # logger.info("%s %s", nonce, partial)
-        partials.append(partial.hex())
+        dec = partial = crypto.decrypt(node_id, args.key, partial)
+        print("partial", partial, len(partial), 128+66+8)
+        partial, assignee = dec[8:74], dec[74:]
+        print("assignee", assignee)
+        nonce = int.from_bytes(dec[:8], 'big')
+        index = int.from_bytes(dec[8:10], 'big')
+        logger.info("index: %s nonce: %s partial: %s", index, nonce, partial)
+        partials[index] = partial.hex()
+        print(index, len(partial))
 
-    logger.info(partials)
     try:
-        r = crypto.tbls_recover(args.key, partials, config['commitments'], len(config['signers']))
+        r = crypto.tbls_recover(assignee.hex(), list(partials.values()), config['commitments'], len(config['signers']))
         logger.info('++++signature:%s', r)
+        return r
     except Exception as e:
         logger.info(e)
 
@@ -122,7 +126,6 @@ def request_setup(args):
         "pin_token": "",
         "private_key": messenger.key
     }
-    bot = MixinBotApi(bot_config)
     async def run():
         data = message.make_setup_message(config.node_config.key, args.nonce)
         data = base64.urlsafe_b64encode(data).rstrip(b'=')
@@ -200,5 +203,5 @@ def Main(argv):
     args.func(args)
 
 if __name__ == '__main__':
-	Main(sys.argv[1:])
+    Main(sys.argv[1:])
 # print(config)
